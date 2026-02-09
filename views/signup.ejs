@@ -1,0 +1,34 @@
+<html>
+	<%- include("./partials/head.ejs") %>
+	<body>
+		<div class="content-container">
+			<h1>Sign up form</h1>
+			<%- include("./partials/errors.ejs") %>
+			<form action="/sign-up" method="post">
+				<label for="firtName"
+					>First name:
+					<input type="text" name="firstName" id="firstName" required
+				/></label>
+				<label for="lastName"
+					>Last name: <input type="text" name="lastName" id="lastName" required
+				/></label>
+				<label for="username"
+					>E-mail: <input type="email" name="username" id="username" required
+				/></label>
+				<label for="password"
+					>Password:
+					<input type="password" name="password" id="password" required
+				/></label>
+				<label for="confirmPassword"
+					>Confirm Password:
+					<input
+						type="password"
+						name="confirmPassword"
+						id="confirmPassword"
+						required
+				/></label>
+				<button type="submit">Sign up</button>
+			</form>
+		</div>
+	</body>
+</html>
