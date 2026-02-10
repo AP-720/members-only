@@ -3,7 +3,26 @@
 	<body>
 		<div class="content-container">
 			<h1><%= title %></h1>
-			<a href="/sign-up">Sign up</a>
+			<% if (locals.currentUser) { %>
+				<h2>Welcome <%= locals.currentUser.first_name %> </h2>
+				<a href="/log-out">Log Out</a>
+			<% } else { %>
+				<a href="/sign-up">Sign up</a>
+				<div class="login-container">
+					<h2>Log in</h2>
+					<form action="/log-in" method="POST">
+						<label for="username">Username: 
+							<input id="username" name="username" type="text"/>
+						</label>
+
+						<label for="password">Password: 
+							<input id="password" name="password" type="password"/>
+						</label>
+
+						<button type="submit">Log In</button>
+					</form>
+			</div> 
+			<% } %>
 		</div>
 	</body>
 </html>
