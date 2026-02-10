@@ -1,5 +1,6 @@
+const bcrypt = require("bcryptjs");
 const db = require("../db/queries");
-const { body, validationResult } = require("express-validator");
+const { body, validationResult, matchedData } = require("express-validator");
 
 const validateSignup = [
 	body("firstName")
@@ -48,7 +49,7 @@ async function getSignup(req, res) {
 
 const postSignup = [
 	validateSignup,
-	(req, res) => {
+	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res
@@ -56,8 +57,16 @@ const postSignup = [
 				.render("signup", { title: "Sign up", errors: errors.array() });
 		}
 
-		console.log(req.body);
-		res.redirect("/");
+		const { firstName, lastName, username, password } = matchedData(req);
+
+		try {
+			const hashedPassword = await bcrypt.hash(password, 10);
+			await db.postSignUp(firstName, lastName, username, hashedPassword);
+			res.redirect("/");
+		} catch (err) {
+			console.error(err);
+			res.status(500).send("Server error");
+		}
 	},
 ];
 
