@@ -1,0 +1,17 @@
+<div class="message-card">
+	<div>
+		<h4><%= message.message_title %></h4>
+		<p><%= message.message_content %></p>
+	</div>
+<% if(currentUser && currentUser.membership_status) { %>
+    <p>
+        <span><%= message.first_name + " " + message.last_name %></span>
+        <span><%= message.message_created_at.toLocaleString("en-GB", { timeZone: "UTC" }) %></span>
+    </p>
+<% } else { %>
+    <p>
+        <span>Anonymous</span>
+        <span>Date hidden</span>
+    </p>
+<% } %>
+</div>

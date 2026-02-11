@@ -35,6 +35,12 @@
 					</form>
 				</div> 
 			<% } %>
+				<div class="message-container">
+					<h2>Message Board</h2>
+					<% messages.forEach((message) => { %>
+						<%- include('./partials/messageCard.ejs', {message}) %>
+					<% }); %>
+				</div>
 		</div>
 	</body>
 </html>

@@ -18,17 +18,17 @@ const validateMessage = [
 
 async function getIndex(req, res) {
 	try {
-		res.render("index", { title: "Members Only" });
-	} catch (error) {
-		console.error(error);
+		const messages = await db.getMessages();
+		res.render("index", { title: "Members Only", messages });
+	} catch (err) {
+		console.error(err);
+		res.status(500).send("Server error");
 	}
 }
 
 const postSendMessage = [
 	validateMessage,
 	async (req, res) => {
-		console.log("postSendMessage:", req);
-		
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res
@@ -36,7 +36,7 @@ const postSendMessage = [
 				.render("index", { title: "Members Only", errors: errors.array() });
 		}
 
-		const user_id = req.user.id
+		const user_id = req.user.id;
 		const { title, content } = matchedData(req);
 
 		try {

@@ -46,7 +46,28 @@ async function postNewMessage(user_id, title, content) {
 	}
 }
 
+async function getMessages() {
+	const { rows } = await pool.query(
+		`
+		SELECT 
+			users.id,
+			users.first_name AS first_name,
+			users.last_name AS last_name,
+			users.email AS username,
+			messages.title AS message_title,
+			messages.content AS message_content,
+			messages.created_at AS message_created_at
+		FROM users
+		JOIN messages ON users.id = messages.user_id
+		ORDER BY messages.created_at DESC
+		`,
+	);
+
+	return rows;
+}
+
 module.exports = {
 	postSignUp,
 	postNewMessage,
+	getMessages,
 };
