@@ -68,4 +68,17 @@ a:visited {
 	color: inherit;
 }
 
+.message-form-container > form {
+	display: grid;
+	gap: var(--spacing-sm);
+	grid-template-columns: 20rem;
+}
 
+.message-form-container > form > label {
+	display: grid;
+}
+
+.message-form-container > form > button {
+	padding: var(--spacing-xs) var(--spacing-lg);
+	justify-self: center;
+}

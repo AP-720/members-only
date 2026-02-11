@@ -22,6 +22,31 @@ async function postSignUp(firstName, lastName, username, hashedPassword) {
 	}
 }
 
-module.exports = {
-    postSignUp,
+async function postNewMessage(user_id, title, content) {
+	const client = await pool.connect();
+
+	try {
+		await client.query("BEGIN");
+
+		await client.query(
+			`
+			INSERT INTO messages (user_id, title, content)
+			VALUES ($1, $2, $3)
+			`,
+			[user_id, title, content],
+		);
+
+		await client.query("COMMIT");
+	} catch (err) {
+		await client.query("ROLLBACK");
+		console.error("postNewMessage:", err);
+		throw err;
+	} finally {
+		await client.release();
+	}
 }
+
+module.exports = {
+	postSignUp,
+	postNewMessage,
+};

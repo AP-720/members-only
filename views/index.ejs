@@ -3,9 +3,21 @@
 	<body>
 		<div class="content-container">
 			<h1><%= title %></h1>
+			<%- include("./partials/errors.ejs") %>
 			<% if (locals.currentUser) { %>
 				<h2>Welcome <%= locals.currentUser.first_name %> </h2>
 				<a href="/log-out">Log Out</a>
+				<div class="message-form-container">
+					<h3>Create Message</h3>
+					<form action="/send-message" method="post">
+						<label for="title">Title: <input type="text" name="title" id="title"></label>
+
+						<label for="content">Message Content:
+							<textarea name="content" id="content"></textarea>
+						</label>
+						<button type="submit">Send Message</button>
+					</form>
+				</div>
 			<% } else { %>
 				<a href="/sign-up">Sign up</a>
 				<div class="login-container">
@@ -21,7 +33,7 @@
 
 						<button type="submit">Log In</button>
 					</form>
-			</div> 
+				</div> 
 			<% } %>
 		</div>
 	</body>

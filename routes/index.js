@@ -21,4 +21,6 @@ indexRouter.get("/log-out", (req, res, next) => {
 	});
 });
 
+indexRouter.post("/send-message", indexController.postSendMessage);
+
 module.exports = indexRouter;
