@@ -1,3 +1,4 @@
+require("dotenv").config();
 const db = require("../db/queries");
 const { body, validationResult, matchedData } = require("express-validator");
 const { isAuth } = require("../routes/authMiddleware");
@@ -51,7 +52,39 @@ const postSendMessage = [
 	},
 ];
 
+const getAdvancedSettings = [
+	isAuth,
+	async (req, res) => {
+		res.render("advancedSettings", { title: "Members Only" });
+	},
+];
+
+const postBecomeMember = [
+	isAuth,
+	async (req, res) => {
+		const membership_code = req.body.membership_code.trim();
+
+		const user_id = req.user.id;
+		// Needed to make sure it matched the shape expected, rather than an array of strings. 
+		const errors = [{ msg: "Incorrect code." }]
+
+		try {
+			if (process.env.MEMBERSHIP_CODE === membership_code) {
+				await db.updateMembershipStatus(user_id);
+				res.redirect("/");
+			} else {
+				res.render("advancedSettings", { title: "Members Only", errors });
+			}
+		} catch (err) {
+			console.error(err);
+			res.status(500).send("Server error");
+		}
+	},
+];
+
 module.exports = {
 	getIndex,
 	postSendMessage,
+	getAdvancedSettings,
+	postBecomeMember,
 };

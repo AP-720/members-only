@@ -66,8 +66,22 @@ async function getMessages() {
 	return rows;
 }
 
+async function updateMembershipStatus(user_id) {
+	try {
+		await pool.query(`
+				UPDATE users
+				SET membership_status = true
+				WHERE id = $1
+			`, [user_id]);
+	} catch (err) {
+		console.error("updateMembershipStatus", err);
+		throw err;
+	}
+}
+
 module.exports = {
 	postSignUp,
 	postNewMessage,
 	getMessages,
+	updateMembershipStatus
 };

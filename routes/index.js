@@ -20,7 +20,8 @@ indexRouter.get("/log-out", (req, res, next) => {
 		res.redirect("/");
 	});
 });
-
+indexRouter.get("/advanced-settings", indexController.getAdvancedSettings)
+indexRouter.post("/become-member", indexController.postBecomeMember)
 indexRouter.post("/send-message", indexController.postSendMessage);
 
 module.exports = indexRouter;
