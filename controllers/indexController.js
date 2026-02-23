@@ -1,5 +1,6 @@
 const db = require("../db/queries");
 const { body, validationResult, matchedData } = require("express-validator");
+const { isAuth } = require("../routes/authMiddleware");
 
 const validateMessage = [
 	body("title")
@@ -28,6 +29,7 @@ async function getIndex(req, res) {
 
 const postSendMessage = [
 	validateMessage,
+	isAuth,
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
