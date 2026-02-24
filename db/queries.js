@@ -68,13 +68,32 @@ async function getMessages() {
 
 async function updateMembershipStatus(user_id) {
 	try {
-		await pool.query(`
+		await pool.query(
+			`
 				UPDATE users
 				SET membership_status = true
 				WHERE id = $1
-			`, [user_id]);
+			`,
+			[user_id],
+		);
 	} catch (err) {
 		console.error("updateMembershipStatus", err);
+		throw err;
+	}
+}
+
+async function updateAdminStatus(user_id) {
+	try {
+		await pool.query(
+			`
+				UPDATE users
+				SET admin_status = true
+				WHERE id = $1
+			`,
+			[user_id],
+		);
+	} catch (err) {
+		console.error("updateAdminStatus", err);
 		throw err;
 	}
 }
@@ -83,5 +102,6 @@ module.exports = {
 	postSignUp,
 	postNewMessage,
 	getMessages,
-	updateMembershipStatus
+	updateMembershipStatus,
+	updateAdminStatus,
 };

@@ -5,6 +5,7 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     membership_status Boolean DEFAULT FALSE NOT NULL
+    admin_status Boolean DEFAULT FALSE NOT NULL
 );
 
 CREATE TABLE messages (

@@ -20,8 +20,9 @@ indexRouter.get("/log-out", (req, res, next) => {
 		res.redirect("/");
 	});
 });
-indexRouter.get("/advanced-settings", indexController.getAdvancedSettings)
-indexRouter.post("/become-member", indexController.postBecomeMember)
+indexRouter.get("/advanced-settings", indexController.getAdvancedSettings);
+indexRouter.post("/become-member", indexController.postBecomeMember);
+indexRouter.post("/become-admin", indexController.postBecomeAdmin);
 indexRouter.post("/send-message", indexController.postSendMessage);
 
 module.exports = indexRouter;

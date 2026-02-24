@@ -1,7 +1,7 @@
 require("dotenv").config();
 const db = require("../db/queries");
 const { body, validationResult, matchedData } = require("express-validator");
-const { isAuth } = require("../routes/authMiddleware");
+const { isAuth, isMember } = require("../routes/authMiddleware");
 
 const validateMessage = [
 	body("title")
@@ -62,15 +62,49 @@ const getAdvancedSettings = [
 const postBecomeMember = [
 	isAuth,
 	async (req, res) => {
+		// Check to prevent members from resubmitting the form.
+		if (req.user.membership_status) {
+			return res.redirect("/");
+		}
+
 		const membership_code = req.body.membership_code.trim();
 
 		const user_id = req.user.id;
-		// Needed to make sure it matched the shape expected, rather than an array of strings. 
-		const errors = [{ msg: "Incorrect code." }]
+		// Needed to make sure it matched the shape expected, rather than an array of strings.
+		const errors = [{ msg: "Incorrect code." }];
 
 		try {
 			if (process.env.MEMBERSHIP_CODE === membership_code) {
 				await db.updateMembershipStatus(user_id);
+				res.redirect("/");
+			} else {
+				res.render("advancedSettings", { title: "Members Only", errors });
+			}
+		} catch (err) {
+			console.error(err);
+			res.status(500).send("Server error");
+		}
+	},
+];
+
+const postBecomeAdmin = [
+	isAuth,
+	isMember,
+	async (req, res) => {
+		// Check to prevent admins from resubmitting the form.
+		if (req.user.admin_status) {
+			return res.redirect("/");
+		}
+
+		const admin_code = req.body.admin_code.trim();
+
+		const user_id = req.user.id;
+		// Needed to make sure it matched the shape expected, rather than an array of strings.
+		const errors = [{ msg: "Incorrect code." }];
+
+		try {
+			if (process.env.ADMIN_CODE === admin_code) {
+				await db.updateAdminStatus(user_id);
 				res.redirect("/");
 			} else {
 				res.render("advancedSettings", { title: "Members Only", errors });
@@ -87,4 +121,5 @@ module.exports = {
 	postSendMessage,
 	getAdvancedSettings,
 	postBecomeMember,
+	postBecomeAdmin,
 };

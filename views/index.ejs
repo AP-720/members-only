@@ -6,8 +6,11 @@
 			<%- include("./partials/errors.ejs") %>
 			<% if (locals.currentUser) { %>
 				<h2>Welcome <%= locals.currentUser.first_name %> </h2>
+				<% if (locals.currentUser.admin_status) { %>
+					<h3>Admin</h3>
+				<% } %>
+				<a href="/advanced-settings">Advanced Settings</a>
 				<a href="/log-out">Log Out</a>
-				<a href="/advanced-settings">Become Member</a>
 				<div class="message-form-container">
 					<h3>Create Message</h3>
 					<form action="/send-message" method="post">

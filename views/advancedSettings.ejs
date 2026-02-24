@@ -8,9 +8,21 @@
 			<h2>Become Member</h2>
 			<label for="membership_code"
 				>Membership Code:
-				<input name="membership_code" id="membership_code" />
+				<input name="membership_code" id="membership_code" 
+				<% if (locals.currentUser.membership_status) { %> disabled
+				<% } %> />
 			</label>
 			<button type="submit">Enter</button>
 		</form>
+		<% if(locals.currentUser.membership_status) { %>
+		<form action="/become-admin" method="post">
+			<h2>Become Admin</h2>
+			<label for="admin_code"
+				>Admin Code:
+				<input name="admin_code" id="admin_code" />
+			</label>
+			<button type="submit">Enter</button>
+		</form>
+		<% } %>
 	</div>
 </html>
