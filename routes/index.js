@@ -24,5 +24,6 @@ indexRouter.get("/advanced-settings", indexController.getAdvancedSettings);
 indexRouter.post("/become-member", indexController.postBecomeMember);
 indexRouter.post("/become-admin", indexController.postBecomeAdmin);
 indexRouter.post("/send-message", indexController.postSendMessage);
+indexRouter.post("/:id/delete", indexController.postDeleteMessage);
 
 module.exports = indexRouter;

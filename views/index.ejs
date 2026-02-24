@@ -4,9 +4,9 @@
 		<div class="content-container">
 			<h1><%= title %></h1>
 			<%- include("./partials/errors.ejs") %>
-			<% if (locals.currentUser) { %>
-				<h2>Welcome <%= locals.currentUser.first_name %> </h2>
-				<% if (locals.currentUser.admin_status) { %>
+			<% if (currentUser) { %>
+				<h2>Welcome <%= currentUser.first_name %> </h2>
+				<% if (currentUser.admin_status) { %>
 					<h3>Admin</h3>
 				<% } %>
 				<a href="/advanced-settings">Advanced Settings</a>

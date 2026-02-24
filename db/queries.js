@@ -54,6 +54,7 @@ async function getMessages() {
 			users.first_name AS first_name,
 			users.last_name AS last_name,
 			users.email AS username,
+			messages.id AS message_id,
 			messages.title AS message_title,
 			messages.content AS message_content,
 			messages.created_at AS message_created_at
@@ -64,6 +65,10 @@ async function getMessages() {
 	);
 
 	return rows;
+}
+
+async function deleteMessage(messageId) {
+	await pool.query(`DELETE FROM messages WHERE id = $1;`, [messageId]);
 }
 
 async function updateMembershipStatus(user_id) {
@@ -102,6 +107,7 @@ module.exports = {
 	postSignUp,
 	postNewMessage,
 	getMessages,
+	deleteMessage,
 	updateMembershipStatus,
 	updateAdminStatus,
 };

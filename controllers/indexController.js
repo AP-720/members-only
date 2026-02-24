@@ -1,7 +1,7 @@
 require("dotenv").config();
 const db = require("../db/queries");
 const { body, validationResult, matchedData } = require("express-validator");
-const { isAuth, isMember } = require("../routes/authMiddleware");
+const { isAuth, isMember, isAdmin } = require("../routes/authMiddleware");
 
 const validateMessage = [
 	body("title")
@@ -48,6 +48,22 @@ const postSendMessage = [
 		} catch (err) {
 			console.error(err);
 			res.status(500).send("Server error");
+		}
+	},
+];
+
+const postDeleteMessage = [
+	isAuth,
+	isAdmin,
+	async (req, res) => {
+		const messageId = Number(req.params.id);
+
+		try {
+			await db.deleteMessage(messageId);
+			res.redirect("/");
+		} catch (err) {
+			console.error("Error deleting message:", err);
+			res.status(500).send("Server error during deletion.");
 		}
 	},
 ];
@@ -122,4 +138,5 @@ module.exports = {
 	getAdvancedSettings,
 	postBecomeMember,
 	postBecomeAdmin,
+	postDeleteMessage,
 };
