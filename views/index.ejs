@@ -17,7 +17,7 @@
 						<div class="message-form-container">
 							<h2>Welcome <%= currentUser.first_name %> </h2>
 							<% if (currentUser.admin_status) { %>
-							<h3>Admin</h3>
+							<h3 class="admin">Admin</h3>
 							<% } %>
 							<h3>Create Message</h3>
 							<form action="/send-message" method="post">

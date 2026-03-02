@@ -186,7 +186,8 @@ a:visited {
 	box-shadow: var(--shadow);
 }
 
-.message-form-container > h2 {
+.message-form-container > h2,
+.admin {
 	text-align: center;
 }
 
@@ -264,5 +265,32 @@ a:visited {
 }
 
 .sign-up-form > label {
+	display: grid;
+}
+
+/* Advance Form Page */
+
+.advanced-form-container {
+	border: 1px var(--secondary) solid;
+	border-radius: 5px;
+	padding: var(--spacing-md);
+	background-color: var(--bg-surface);
+	box-shadow: var(--shadow);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: var(--spacing-md);
+	justify-items: center;
+}
+
+.advanced-form-container form {
+	display: grid;
+	gap: var(--spacing-sm);
+}
+
+.advanced-form-container button {
+	justify-self: center;
+}
+
+.advanced-form-container label {
 	display: grid;
 }
