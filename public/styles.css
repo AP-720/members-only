@@ -32,12 +32,16 @@
 	--spacing-lg: 1.5rem;
 	--spacing-xl: 2rem;
 	--spacing-xxl: 3rem;
+
+	/* Shadow */
+	--shadow:
+		rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 body {
 	background-color: var(--bg-main);
 	margin: 0;
-	padding: var(--spacing-md);
+	/* padding: var(--spacing-md); */
 	color: var(--text-main);
 }
 
@@ -68,6 +72,108 @@ a:visited {
 	color: inherit;
 }
 
+.content-container {
+	max-width: 80rem;
+	margin-inline: auto;
+	padding: var(--spacing-lg);
+}
+
+.page-title {
+	padding: 0 0 var(--spacing-lg) 0;
+}
+
+/* Main Grid layout */
+
+.grid-container {
+	display: grid;
+	grid-template-columns: 1fr 20rem;
+	gap: var(--spacing-md);
+}
+
+/* Menu Container */
+
+.menu-container {
+	grid-column: 2 / -1;
+	display: grid;
+	grid-template-columns: 1fr;
+	align-items: start;
+}
+
+.menu-container > a {
+	font-size: var(--spacing-xl);
+	display: inline-block;
+	padding: 0.6rem 1.2rem;
+	background-color: var(--primary);
+	border: solid var(--primary-hover);
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+	font-weight: 600;
+	text-align: center;
+	justify-self: center;
+	box-shadow: var(--shadow);
+}
+
+.menu-container > a:hover {
+	background-color: var(--primary-active);
+	border: solid var(--primary);
+}
+
+/* Login Container */
+
+.login-container {
+	background-color: var(--bg-surface);
+	border: 1px var(--secondary) solid;
+	border-radius: 5px;
+	padding: var(--spacing-md);
+	display: grid;
+	grid-template-columns: 1fr;
+	align-content: start;
+	gap: var(--spacing-sm);
+	box-shadow: var(--shadow);
+}
+
+.login-container > h2 {
+	text-align: center;
+}
+
+.login-container > form {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--spacing-sm);
+}
+
+.login-container > form > button {
+	justify-self: center;
+	padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.login-container > form > label {
+	display: grid;
+	grid-template-columns: 1fr;
+}
+
+/* Message Container */
+
+.message-container {
+	border: 1px var(--secondary) solid;
+	border-radius: 5px;
+	padding: var(--spacing-md);
+	background-color: var(--bg-surface);
+	grid-column: 1 / 2;
+	grid-row: -1/ 1;
+	box-shadow: var(--shadow);
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--spacing-md);
+}
+
+.message-container > h2 {
+	text-align: center;
+}
+
+/* Message Form */
+
 .message-form-container > form {
 	display: grid;
 	gap: var(--spacing-sm);
@@ -82,3 +188,16 @@ a:visited {
 	padding: var(--spacing-xs) var(--spacing-lg);
 	justify-self: center;
 }
+
+/* Message Card */
+
+.message-card {
+	display: grid;
+	grid-column: 1fr;
+	gap: var(--spacing-xs);
+}
+
+.message-card h4 {
+	padding: 0 0 var(--spacing-sm) 0;
+}
+

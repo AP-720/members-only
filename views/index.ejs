@@ -2,49 +2,62 @@
 	<%- include("./partials/head.ejs") %> 
 	<body>
 		<div class="content-container">
-			<h1><%= title %></h1>
+			<h1 class="page-title"><%= title %></h1>
 			<%- include("./partials/errors.ejs") %>
 			<% if (currentUser) { %>
-				<h2>Welcome <%= currentUser.first_name %> </h2>
-				<% if (currentUser.admin_status) { %>
-					<h3>Admin</h3>
-				<% } %>
-				<a href="/advanced-settings">Advanced Settings</a>
-				<a href="/log-out">Log Out</a>
-				<div class="message-form-container">
-					<h3>Create Message</h3>
-					<form action="/send-message" method="post">
-						<label for="title">Title: <input type="text" name="title" id="title"></label>
-
-						<label for="content">Message Content:
-							<textarea name="content" id="content"></textarea>
-						</label>
-						<button type="submit">Send Message</button>
-					</form>
+				<div class="grid-container">
+					
+					<div class="menu-container">
+						<h2>Welcome <%= currentUser.first_name %> </h2>
+						<% if (currentUser.admin_status) { %>
+							<h3>Admin</h3>
+						<% } %>
+						<a href="/advanced-settings">Advanced Settings</a>
+						<a href="/log-out">Log Out</a>
+						<div class="message-form-container">
+							<h3>Create Message</h3>
+							<form action="/send-message" method="post">
+								<label for="title">Title: <input type="text" name="title" id="title"></label>
+								<label for="content">Message Content:
+									<textarea name="content" id="content"></textarea>
+								</label>
+								<button type="submit">Send Message</button>
+							</form>
+						</div>
+					</div>
+					<div class="message-container">
+						<h2>Message Board</h2>
+						<% messages.forEach((message) => { %>
+							<%- include('./partials/messageCard.ejs', {message}) %>
+						<% }); %>
+					</div>
 				</div>
 			<% } else { %>
-				<a href="/sign-up">Sign up</a>
-				<div class="login-container">
-					<h2>Log in</h2>
-					<form action="/log-in" method="POST">
-						<label for="username">Username: 
-							<input id="username" name="username" type="text"/>
-						</label>
-
-						<label for="password">Password: 
-							<input id="password" name="password" type="password"/>
-						</label>
-
-						<button type="submit">Log In</button>
-					</form>
-				</div> 
-			<% } %>
-				<div class="message-container">
-					<h2>Message Board</h2>
-					<% messages.forEach((message) => { %>
-						<%- include('./partials/messageCard.ejs', {message}) %>
-					<% }); %>
+				<div class="grid-container">
+					<div class="message-container">
+						<h2>Message Board</h2>
+						<% messages.forEach((message) => { %>
+							<%- include('./partials/messageCard.ejs', {message}) %>
+						<% }); %>
+					</div>
+					<div class="menu-container">
+						<div class="login-container">
+							<h2>Log in</h2>
+							<form action="/log-in" method="POST">
+								<label for="username">Username:
+									<input id="username" name="username" type="text"/>
+								</label>
+								<label for="password">Password:
+									<input id="password" name="password" type="password"/>
+								</label>
+								<button type="submit">Log In</button>
+							</form>
+						</div>
+						<a href="/sign-up">Sign up</a>
+					</div>
 				</div>
+			<% } %>
+				
 		</div>
 	</body>
 </html>
