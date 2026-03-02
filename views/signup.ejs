@@ -2,10 +2,12 @@
 	<%- include("./partials/head.ejs") %>
 	<body>
 		<div class="content-container">
-			<h1>Sign up form</h1>
-			<a href="/">Home</a>
+			<div class="nav-bar page-title">
+				<h1 >Sign up form</h1>
+				<a href="/">Home</a>
+			</div>
 			<%- include("./partials/errors.ejs") %>
-			<form action="/sign-up" method="post">
+			<form class="sign-up-form" action="/sign-up" method="post">
 				<label for="firtName"
 					>First name:
 					<input type="text" name="firstName" id="firstName" required

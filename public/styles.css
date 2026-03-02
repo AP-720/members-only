@@ -201,3 +201,29 @@ a:visited {
 	padding: 0 0 var(--spacing-sm) 0;
 }
 
+/* Nav Bar */
+
+.nav-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-xxl);
+}
+
+/* Sign up form */
+
+.sign-up-form {
+	border: 1px var(--secondary) solid;
+	border-radius: 5px;
+	padding: var(--spacing-md);
+	background-color: var(--bg-surface);
+	box-shadow: var(--shadow);
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--spacing-md);
+	justify-items: center;
+}
+
+.sign-up-form > label {
+	display: grid;
+}
