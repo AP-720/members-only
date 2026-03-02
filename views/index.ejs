@@ -6,15 +6,19 @@
 			<%- include("./partials/errors.ejs") %>
 			<% if (currentUser) { %>
 				<div class="grid-container">
+					<div class="message-container">
+						<h2>Message Board</h2>
+						<% messages.forEach((message) => { %>
+							<%- include('./partials/messageCard.ejs', {message}) %>
+						<% }); %>
+					</div>
 					
 					<div class="menu-container">
-						<h2>Welcome <%= currentUser.first_name %> </h2>
-						<% if (currentUser.admin_status) { %>
-							<h3>Admin</h3>
-						<% } %>
-						<a href="/advanced-settings">Advanced Settings</a>
-						<a href="/log-out">Log Out</a>
 						<div class="message-form-container">
+							<h2>Welcome <%= currentUser.first_name %> </h2>
+							<% if (currentUser.admin_status) { %>
+							<h3>Admin</h3>
+							<% } %>
 							<h3>Create Message</h3>
 							<form action="/send-message" method="post">
 								<label for="title">Title: <input type="text" name="title" id="title"></label>
@@ -24,12 +28,10 @@
 								<button type="submit">Send Message</button>
 							</form>
 						</div>
-					</div>
-					<div class="message-container">
-						<h2>Message Board</h2>
-						<% messages.forEach((message) => { %>
-							<%- include('./partials/messageCard.ejs', {message}) %>
-						<% }); %>
+						<div class="button-container">
+							<a href="/advanced-settings">Advanced Settings</a>
+							<a href="/log-out">Log Out</a>
+						</div>
 					</div>
 				</div>
 			<% } else { %>
