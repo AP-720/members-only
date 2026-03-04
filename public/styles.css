@@ -133,9 +133,10 @@ a:visited {
 /* Message Card */
 
 .message-card {
+	align-content: start;
 	display: grid;
-	grid-column: 1fr;
 	gap: var(--spacing-xs);
+	grid-column: 1fr;
 }
 
 .message-card h4 {
@@ -167,8 +168,9 @@ a:visited {
 	grid-column: 2 / -1;
 	display: grid;
 	grid-template-columns: 1fr;
-	align-items: start;
+	align-items: center;
 	justify-items: center;
+	gap: var(--spacing-md);
 }
 
 /* Login Container */
@@ -203,6 +205,7 @@ a:visited {
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: var(--spacing-md);
+	align-content: start;
 }
 
 /* Message Form */
