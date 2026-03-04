@@ -6,7 +6,7 @@
 			<a href="/">Home</a>
 		</div>
 		<%- include("./partials/errors.ejs") %>
-		<div class="advanced-form-container">
+		<div class="card advanced-form-container">
 			<form action="/become-member" method="post">
 				<h2>Become Member</h2>
 				<label for="membership_code"
@@ -15,7 +15,7 @@
 					<% if (currentUser.membership_status) { %> disabled
 					<% } %> />
 				</label>
-				<button type="submit">Enter</button>
+				<button class="justify-self-center" type="submit">Enter</button>
 			</form>
 			<% if(currentUser.membership_status) { %>
 			<form action="/become-admin" method="post">
@@ -24,7 +24,7 @@
 					>Admin Code:
 					<input name="admin_code" id="admin_code" />
 				</label>
-				<button type="submit">Enter</button>
+				<button class="justify-self-center" type="submit">Enter</button>
 			</form>
 			<% } %>
 		</div>

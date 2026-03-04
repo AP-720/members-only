@@ -6,18 +6,18 @@
 			<%- include("./partials/errors.ejs") %>
 			<% if (currentUser) { %>
 				<div class="grid-container">
-					<div class="message-container">
-						<h2>Message Board</h2>
+					<div class="card message-container">
+						<h2 class="text-center">Message Board</h2>
 						<% messages.forEach((message) => { %>
 							<%- include('./partials/messageCard.ejs', {message}) %>
 						<% }); %>
 					</div>
 					
 					<div class="menu-container">
-						<div class="message-form-container">
-							<h2>Welcome <%= currentUser.first_name %> </h2>
+						<div class="card message-form-container">
+							<h2 class="text-center">Welcome <%= currentUser.first_name %> </h2>
 							<% if (currentUser.admin_status) { %>
-							<h3 class="admin">Admin</h3>
+							<h3 class="text-center">Admin</h3>
 							<% } %>
 							<h3>Create Message</h3>
 							<form action="/send-message" method="post">
@@ -25,26 +25,26 @@
 								<label for="content">Message Content:
 									<textarea name="content" id="content"></textarea>
 								</label>
-								<button type="submit">Send Message</button>
+								<button class="justify-self-center" type="submit">Send Message</button>
 							</form>
 						</div>
-						<div class="button-container">
-							<a href="/advanced-settings">Advanced Settings</a>
-							<a href="/log-out">Log Out</a>
+						<div>
+							<a class="btn-link" href="/advanced-settings">Advanced Settings</a>
+							<a class="btn-link" href="/log-out">Log Out</a>
 						</div>
 					</div>
 				</div>
 			<% } else { %>
 				<div class="grid-container">
-					<div class="message-container">
+					<div class="card message-container">
 						<h2>Message Board</h2>
 						<% messages.forEach((message) => { %>
 							<%- include('./partials/messageCard.ejs', {message}) %>
 						<% }); %>
 					</div>
 					<div class="menu-container">
-						<div class="login-container">
-							<h2>Log in</h2>
+						<div class="card login-container">
+							<h2 class="text-center">Log in</h2>
 							<form action="/log-in" method="POST">
 								<label for="username">Username:
 									<input id="username" name="username" type="text"/>
@@ -52,10 +52,10 @@
 								<label for="password">Password:
 									<input id="password" name="password" type="password"/>
 								</label>
-								<button type="submit">Log In</button>
+								<button class="justify-self-center" type="submit">Log In</button>
 							</form>
 						</div>
-						<a href="/sign-up">Sign up</a>
+						<a class="btn-link btn-link--large" href="/sign-up">Sign up</a>
 					</div>
 				</div>
 			<% } %>
